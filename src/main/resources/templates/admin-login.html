@@ -1,0 +1,133 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Student Progress Tracker</title>
+<!-- Bootstrap CSS -->
+<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+
+<!-- Custom CSS -->
+<link rel="stylesheet" th:href="@{/style.css}">
+</head>
+<body class="d-flex flex-column min-vh-100">
+
+  <!-- Header with Navbar -->
+  <header class="header-custom">
+    <nav class="navbar navbar-expand-lg navbar-dark">
+      <div class="container-fluid">
+
+        <!-- Logo + App Name -->
+        <a class="navbar-brand d-flex align-items-center" href="#">
+         <img th:src="@{/images/logo1.jpg}" width="80" height="80" class="me-2">
+       
+          TrackMyGrades
+        </a>
+
+        <!-- Mobile toggle button -->
+        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarText">
+          <span class="navbar-toggler-icon"></span>
+        </button>
+
+        <!-- Navbar links -->
+        <div class="collapse navbar-collapse" id="navbarText">
+          <ul class="navbar-nav me-auto">
+            <li class="nav-item"><a class="nav-link active" href="#">Home</a></li>
+            <li class="nav-item"><a class="nav-link" href="#">Logins</a></li>
+            <li class="nav-item"><a class="nav-link" href="#">Special Offers</a></li>
+          </ul>
+          <span class="navbar-text text-white">TrackMyGrade App</span>
+        </div>
+      </div>
+    </nav>
+
+    <!-- Header title under navbar -->
+    <div class="text-center text-white py-3">
+        <h1> TrackMyGrades</h1>
+      <h2>Student Progress App</h2>
+      <p>Learn • Track • Improve</p>
+    </div>
+  </header>
+
+
+
+
+
+<!-- Admin Login -->
+
+<div class="container mt-5">
+    <div class="card p-4 shadow">
+        <h3 class="text-center">Admin Login</h3>
+
+
+    <form th:action="@{/admin/login}" method="post">
+        <div class="mb-3">
+            <input type="text" name="username" class="form-control" placeholder="Username" required>
+        </div>
+
+        <div class="mb-3">
+            <input type="password" name="password" class="form-control" placeholder="Password" required>
+        </div>
+
+        <button class="btn btn-primary w-100">Login</button>
+    </form>
+
+    <p class="text-danger mt-2" th:text="${adminError}"></p>
+</div>
+</div>
+
+<!-- Student Section -->
+
+<div class="container mt-5">
+    <div class="card p-4 shadow">
+
+    <!-- Register Button -->
+           <div class="col-md-3">
+            <div class="card shadow text-center p-3">
+                <h5>New Student?</h5>
+            
+                 <a th:href="@{/student/register}" class="btn btn-primary mt-2">Register Student</a>
+            </div>
+    </div>
+    </div> 
+
+     <!-- Student Login -->
+
+    <div class="container mt-5">
+    <div class="card p-4 shadow">
+        
+    <h3 class="text-center">Student Login</h3>
+
+    <form th:action="@{/student/login}" method="post">
+        <div class="mb-3">
+            <input type="email" name="email" class="form-control" placeholder="Email" required>
+        </div>
+
+        <div class="mb-3">
+            <input type="password" name="password" class="form-control" placeholder="Password" required>
+        </div>
+
+        <button class="btn btn-success w-100">Login</button>
+    </form>
+
+    <p class="text-danger mt-2" th:text="${studentError}"></p>
+</div>
+
+</div>
+</div>
+<footer class="footer mt-auto text-center py-4 footer-custom">
+    <p><strong>Contact Us</strong></p>
+    <p>123 Learning Street, Knowledge City</p>
+    <p>Phone: +123 456 7890 | Email: info@studentprogress.com</p>
+</footer>
+
+<!-- Bootstrap JS Bundle -->
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+</body>
+</html>
+
+
+
+
+

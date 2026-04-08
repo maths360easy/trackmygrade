@@ -1,0 +1,252 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Student Progress Tracker</title>
+<!-- Bootstrap CSS -->
+<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+
+<!-- Custom CSS -->
+<link rel="stylesheet" th:href="@{/style.css}">
+</head>
+<body class="d-flex flex-column min-vh-100">
+
+  <!-- Header with Navbar -->
+  <header class="header-custom">
+    <nav class="navbar navbar-expand-lg navbar-dark">
+      <div class="container-fluid">
+
+        <!-- Logo + App Name -->
+        <a class="navbar-brand d-flex align-items-center" href="#">
+         <img th:src="@{/images/logo1.jpg}" width="80" height="80" class="me-2">
+       
+          TrackMyGrades
+        </a>
+
+        <!-- Mobile toggle button -->
+        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarText">
+          <span class="navbar-toggler-icon"></span>
+        </button>
+
+        <!-- Navbar links -->
+        <div class="collapse navbar-collapse" id="navbarText">
+          <ul class="navbar-nav me-auto">
+            <li class="nav-item"><a class="nav-link active" href="#">Home</a></li>
+            <li class="nav-item"><a class="nav-link" href="#">Logins</a></li>
+            <li class="nav-item"><a class="nav-link" href="#">Special Offers</a></li>
+          </ul>
+          <span class="navbar-text text-white">TrackMyGrade App</span>
+        </div>
+      </div>
+    </nav>
+
+    <!-- Header title under navbar -->
+    <div class="text-center text-white py-3">
+        <h1> TrackMyGrades</h1>
+      <h2>Student Progress App</h2>
+      <p>Learn • Track • Improve</p>
+    </div>
+  </header>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div class="bg-light flex-grow-1">
+
+<main class="container my-4">
+
+<h2 class="text-center mb-4">Manage Students</h2>
+
+<!-- Tabs -->
+<ul class="nav nav-tabs mb-4" id="adminTab" role="tablist">
+  <li class="nav-item">
+    <button class="nav-link active" data-bs-toggle="tab" data-bs-target="#students">Students</button>
+  </li>
+  <li class="nav-item">
+    <button class="nav-link" data-bs-toggle="tab" data-bs-target="#attendance">Attendance</button>
+  </li>
+  <li class="nav-item">
+    <button class="nav-link" data-bs-toggle="tab" data-bs-target="#marks">Marks</button>
+  </li>
+  <li class="nav-item">
+    <button class="nav-link" data-bs-toggle="tab" data-bs-target="#progress">Progress</button>
+  </li>
+</ul>
+
+<div class="tab-content">
+
+  <!-- STUDENTS TAB -->
+  <div class="tab-pane fade show active" id="students">
+    <div class="card shadow mb-4">
+      <div class="card-header bg-dark text-white">Students List</div>
+      <div class="card-body table-responsive">
+        <table class="table table-bordered table-striped">
+          <thead class="table-dark">
+            <tr>
+              <th>Name</th>
+              <th>Email</th>
+              <th>Subjects</th>
+              <th>Fees Paid</th>
+              <th>Actions</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr th:each="student : ${students}">
+              <td th:text="${student.name}"></td>
+              <td th:text="${student.email}"></td>
+              <td th:text="${student.course.subjectName}"></td>
+              <td th:text="${student.feesPaid}"></td>
+              <td>
+                <a th:href="@{/admin/edit/{id}(id=${student.studentId})}" class="btn btn-success btn-sm">Edit</a>
+                <a th:href="@{/admin/delete/{id}(id=${student.studentId})}" class="btn btn-danger btn-sm">Delete</a>
+              </td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </div>
+
+  <!-- ATTENDANCE TAB -->
+  <div class="tab-pane fade" id="attendance">
+    <div class="card shadow mb-4 p-4">
+      <h5>Enter Attendance</h5>
+
+      <form th:action="@{/admin/save-attendance}" th:object="${attendance}" method="post">
+
+        <div class="mb-3">
+          <label>Student</label>
+          <select th:field="*{student}" class="form-select">
+            <option th:each="s : ${students}" th:value="${s.studentId}" th:text="${s.name}"></option>
+          </select>
+        </div>
+
+        <div class="mb-3">
+          <label>Subject</label>
+          <select th:field="*{subject}" class="form-select">
+            <option th:each="subj : ${subjects}" th:value="${subj.id}" th:text="${subj.subjectName}"></option>
+          </select>
+        </div>
+
+        <div class="mb-3">
+          <label class="form-label">Attendance Month</label>
+          <input type="text" th:field="*{amonth}" class="form-control" placeholder="e.g., January">
+        </div>
+
+        <div class="mb-3">
+          <label>Attendance %</label>
+          <input type="number" th:field="*{attendancePercent}" class="form-control">
+        </div>
+
+        <button class="btn btn-success">Save Attendance</button>
+      </form>
+    </div>
+  </div>
+
+  <!-- MARKS TAB -->
+  <div class="tab-pane fade" id="marks">
+    <div class="card shadow mb-4 p-4">
+      <h5>Enter Marks</h5>
+
+      <form th:action="@{/admin/save-marks}" th:object="${marks}" method="post">
+
+        <div class="mb-3">
+          <label>Student</label>
+          <select th:field="*{student}" class="form-select">
+            <option th:each="s : ${students}" th:value="${s.studentId}" th:text="${s.name}"></option>
+          </select>
+        </div>
+
+        <div class="mb-3">
+          <label>Subject</label>
+          <select th:field="*{subject}" class="form-select">
+            <option th:each="subj : ${subjects}" th:value="${subj.id}" th:text="${subj.subjectName}"></option>
+          </select>
+        </div>
+
+        <div class="mb-3">
+          <label>Test Month</label>
+          <input type="text" th:field="*{testMonth}" class="form-control">
+        </div>
+
+        <div class="mb-3">
+          <label>Marks</label>
+          <input type="number" th:field="*{marks}" class="form-control">
+        </div>
+
+        <button class="btn btn-primary">Save Marks</button>
+      </form>
+    </div>
+  </div>
+
+
+  <!-- PROGRESS TAB -->
+<div class="tab-pane fade" id="progress">
+  <div class="card shadow mb-4 p-4">
+    <h5>Enter Progress</h5>
+
+    <form th:action="@{/admin/updateProgress}" method="post">
+
+      <!-- Student -->
+      <div class="mb-3">
+        <label>Student</label>
+        <select name="studentId" class="form-select">
+          <option th:each="s : ${students}"
+                  th:value="${s.studentId}"
+                  th:text="${s.name}">
+          </option>
+        </select>
+      </div>
+
+      <!-- Progress -->
+      <div class="mb-3">
+        <label>Progress %</label>
+        <input type="number" name="progressValue" class="form-control" min="0" max="100" required>
+      </div>
+
+      <button class="btn btn-success">Save Progress</button>
+    </form>
+
+  </div>
+</div>
+
+
+</main>
+
+<div class="text-center mb-4">
+    <a th:href="@{/admin/dashboard}" class="btn btn-secondary">Back to Dashboard</a>
+</div>
+
+</div>
+<!-- FOOTER -->
+<footer class="footer mt-auto text-center py-4 footer-custom">
+    <p><strong>Contact Us</strong></p>
+    <p>123 Learning Street, Knowledge City</p>
+    <p>Phone: +123 456 7890 | Email: info@studentprogress.com</p>
+</footer>
+
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+</body>
+</html>
