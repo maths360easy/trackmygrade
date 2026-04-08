@@ -5,23 +5,24 @@
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <title>Student Progress Tracker</title>
-<!-- Bootstrap CSS -->
-<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
 
-<!-- Custom CSS -->
-<link rel="stylesheet" th:href="@{/style.css}">
+  <!-- Bootstrap CSS -->
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+
+  <!-- Custom CSS -->
+  <link rel="stylesheet" th:href="@{/style.css}">
 </head>
+
 <body class="d-flex flex-column min-vh-100">
 
-  <!-- Header with Navbar -->
+  <!-- HEADER -->
   <header class="header-custom">
     <nav class="navbar navbar-expand-lg navbar-dark">
       <div class="container-fluid">
 
         <!-- Logo + App Name -->
         <a class="navbar-brand d-flex align-items-center" href="#">
-         <img th:src="@{/images/logo1.jpg}" width="80" height="80" class="me-2">
-       
+          <img th:src="@{/images/logo1.jpg}" width="80" height="80" class="me-2">
           TrackMyGrades
         </a>
 
@@ -33,96 +34,111 @@
         <!-- Navbar links -->
         <div class="collapse navbar-collapse" id="navbarText">
           <ul class="navbar-nav me-auto">
-            <li class="nav-item"><a class="nav-link active" href="#">Home</a></li>
-            <li class="nav-item"><a class="nav-link" href="#">Logins</a></li>
-            <li class="nav-item"><a class="nav-link" href="#">Special Offers</a></li>
+            <li class="nav-item"><a class="nav-link active" th:href="@{/home}">Home</a></li>
+          
+            <li class="nav-item"><a class="nav-link" th:href="@{/admin/login}">Login</a></li>
+
           </ul>
           <span class="navbar-text text-white">TrackMyGrade App</span>
         </div>
+
       </div>
     </nav>
 
-    <!-- Header title under navbar -->
+    <div class="d-flex justify-content-end me-4 mt-2">
+    <a href="https://facebook.com" target="_blank" class="mx-2">
+        <img th:src="@{/images/facebook.png}" width="30">
+    </a>
+    <a href="https://instagram.com" target="_blank" class="mx-2">
+        <img th:src="@{/images/instagram.png}" width="30">
+    </a>
+    <a href="https://twitter.com" target="_blank" class="mx-2">
+        <img th:src="@{/images/twitter.png}" width="30">
+    </a>
+  </div>
+
+
+    <!-- Header title -->
     <div class="text-center text-white py-3">
-        <h1> TrackMyGrades</h1>
+      <h1>TrackMyGrades</h1>
       <h2>Student Progress App</h2>
       <p>Learn • Track • Improve</p>
     </div>
   </header>
 
-
-<body class="bg-light">
-
-<div class="container mt-5">
+  <!-- MAIN CONTENT -->
+  <main class="container mt-5 flex-grow-1">
 
     <h2 class="mb-4 text-center">Welcome Admin 🎓</h2>
 
-   <div class="row g-4">
+    <div class="row g-4">
 
-    <!-- Add Students -->
-    <div class="col-md-3">
+      <!-- Add Students -->
+      <div class="col-md-3">
         <div class="card shadow text-center p-3">
-            <h5>Add Students</h5>
-            <a th:href="@{/admin/add-student}" class="btn btn-primary mt-2">Open</a>
+          <h5>Add Students</h5>
+          <a th:href="@{/admin/add-student}" class="btn btn-primary mt-2">Open</a>
         </div>
-    </div>
+      </div>
 
-    <!-- Manage Students -->
-    <div class="col-md-3">
+      <!-- Manage Students -->
+      <div class="col-md-3">
         <div class="card shadow text-center p-3">
-            <h5>Manage Students</h5>
-            <a th:href="@{/admin/managestudent}" class="btn btn-success mt-2">Update</a>
+          <h5>Manage Students</h5>
+          <a th:href="@{/admin/managestudent}" class="btn btn-success mt-2">Update</a>
         </div>
-    </div>
+      </div>
 
-    <!-- Marks -->
-    <div class="col-md-3">
+      <!-- Marks -->
+      <div class="col-md-3">
         <div class="card shadow text-center p-3">
-            <h5>Marks</h5>
-            <a th:href="@{/admin/marks}" class="btn btn-success mt-2">Marks</a>
+          <h5>Marks</h5>
+          <a th:href="@{/admin/marks}" class="btn btn-success mt-2">Marks</a>
         </div>
-    </div>
+      </div>
 
-    <!-- Attendance -->
-    <div class="col-md-3">
+      <!-- Attendance -->
+      <div class="col-md-3">
         <div class="card shadow text-center p-3">
-            <h5>Attendance</h5>
-            <a th:href="@{/admin/attendance}" class="btn btn-success mt-2">Attendance</a>
+          <h5>Attendance</h5>
+          <a th:href="@{/admin/attendance}" class="btn btn-success mt-2">Attendance</a>
         </div>
-    </div>
+      </div>
 
-    <!-- Progress -->
-    <div class="col-md-3">
+      <!-- Progress -->
+      <div class="col-md-3">
         <div class="card shadow text-center p-3">
-            <h5>Progress</h5>
-            <a th:href="@{/admin/progress}" class="btn btn-success mt-2">Progress</a>
+          <h5>Progress</h5>
+          <a th:href="@{/admin/progress}" class="btn btn-success mt-2">Progress</a>
         </div>
-    </div>
+      </div>
 
-    <!-- FeePaid (NOW inside the row) -->
-    <div class="col-md-3">
+      <!-- FeePaid -->
+      <div class="col-md-3">
         <div class="card shadow text-center p-3">
-            <h5>FeePaid</h5>
-            <a th:href="@{/admin/add-student}" class="btn btn-success mt-2">FeePaid</a>
+          <h5>FeePaid</h5>
+          <a th:href="@{/admin/add-student}" class="btn btn-success mt-2">FeePaid</a>
         </div>
-    </div>
+      </div>
 
-</div>
+    </div>
 
     <div class="text-center mt-5">
-        <a th:href="@{/admin/logout}" class="btn btn-danger">Logout</a>
-        
+      <a th:href="@{/admin/logout}" class="btn btn-danger">Logout</a>
     </div>
 
-</div>
+  </main>
 
-<footer class="footer mt-auto text-center py-4 footer-custom">
+  <!-- FOOTER -->
+  <footer class="footer mt-auto text-center py-4 footer-custom">
     <p><strong>Contact Us</strong></p>
     <p>123 Learning Street, Knowledge City</p>
     <p>Phone: +123 456 7890 | Email: info@studentprogress.com</p>
-</footer>
 
-<!-- Bootstrap JS Bundle -->
-<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+  </footer>
+
+  <!-- Bootstrap JS -->
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+
 </body>
 </html>

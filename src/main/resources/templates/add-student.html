@@ -30,13 +30,19 @@
           <ul class="navbar-nav me-auto">
 
             <li class="nav-item"><a class="nav-link active" th:href="@{/home}">Home</a></li>
+      
+
         
-            <li class="nav-item"><a class="nav-link" href="#">Special Offers</a></li>
-          </ul>
+            <li class="nav-item"><a class="nav-link" th:href="@{/admin/login}">login</a></li>
+         
+            </ul>
           <span class="navbar-text text-white">TrackMyGrade App</span>
         </div>
       </div>
     </nav>
+
+
+    
 
     <div class="text-center text-white py-3">
 
@@ -47,6 +53,20 @@
     
     </div>
 </header>
+
+
+<div class="d-flex justify-content-end me-4 mt-2">
+    <a href="https://facebook.com" target="_blank" class="mx-2">
+        <img th:src="@{/images/facebook.png}" width="30">
+    </a>
+    <a href="https://instagram.com" target="_blank" class="mx-2">
+        <img th:src="@{/images/instagram.png}" width="30">
+    </a>
+    <a href="https://twitter.com" target="_blank" class="mx-2">
+        <img th:src="@{/images/twitter.png}" width="30">
+    </a>
+</div>
+
 
 <!-- PAGE CONTENT -->
 <div class="container mt-5 flex-grow-1">

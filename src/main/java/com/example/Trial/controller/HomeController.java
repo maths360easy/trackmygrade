@@ -14,4 +14,8 @@ public class HomeController {
     public String home() {
         return "home";  // loads home.html from templates folder
     }
+
+
+   
+
 }

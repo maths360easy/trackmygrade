@@ -33,14 +33,20 @@
         <!-- Navbar links -->
         <div class="collapse navbar-collapse" id="navbarText">
           <ul class="navbar-nav me-auto">
-            <li class="nav-item"><a class="nav-link active" href="#">Home</a></li>
-            <li class="nav-item"><a class="nav-link" href="#">Logins</a></li>
-            <li class="nav-item"><a class="nav-link" href="#">Special Offers</a></li>
+            <li class="nav-item"><a class="nav-link active" th:href="@{/home}">Home</a></li>
+         
+            <li class="nav-item"><a class="nav-link" th:href="@{/admin/login}">Logins</a></li>
+          
           </ul>
           <span class="navbar-text text-white">Progress Tracker App</span>
         </div>
       </div>
     </nav>
+
+    
+         
+
+
 
     <!-- Header title under navbar -->
     <div class="text-center text-white py-3">
@@ -48,6 +54,21 @@
       <p>Learn • Track • Improve</p>
     </div>
   </header>
+
+
+ <div class="d-flex justify-content-end me-4 mt-2">
+    <a href="https://facebook.com" target="_blank" class="mx-2">
+        <img th:src="@{/images/facebook.png}" width="30">
+    </a>
+    <a href="https://instagram.com" target="_blank" class="mx-2">
+        <img th:src="@{/images/instagram.png}" width="30">
+    </a>
+    <a href="https://twitter.com" target="_blank" class="mx-2">
+        <img th:src="@{/images/twitter.png}" width="30">
+    </a>
+</div>
+
+
 
   <!-- Cards Section -->
   <div class="container mt-4">
@@ -115,6 +136,11 @@
 
     </div>
   </div>
+
+
+
+
+
 
   <!-- Footer -->
   <footer class="footer mt-auto text-center py-4 footer-custom">
