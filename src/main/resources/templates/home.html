@@ -1,5 +1,5 @@
 <!doctype html>
-<html lang="en">
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
 
 <head>
   <meta charset="utf-8">
@@ -8,55 +8,43 @@
 
   <!-- Bootstrap CSS -->
   <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+
   <!-- Custom CSS -->
   <link rel="stylesheet" href="style.css">
 </head>
 
 <body class="d-flex flex-column min-vh-100">
 
-  <!-- Header with Navbar -->
-  <header class="header-custom">
+<header class="header-custom">
     <nav class="navbar navbar-expand-lg navbar-dark">
       <div class="container-fluid">
 
-        <!-- Logo + App Name -->
         <a class="navbar-brand d-flex align-items-center" href="#">
           <img src="./images/logo1.jpg" width="80" height="80" class="me-2">
           TrackMyGrades
         </a>
 
-        <!-- Mobile toggle button -->
         <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarText">
           <span class="navbar-toggler-icon"></span>
         </button>
 
-        <!-- Navbar links -->
         <div class="collapse navbar-collapse" id="navbarText">
           <ul class="navbar-nav me-auto">
             <li class="nav-item"><a class="nav-link active" th:href="@{/home}">Home</a></li>
-         
             <li class="nav-item"><a class="nav-link" th:href="@{/admin/login}">Logins</a></li>
-          
           </ul>
           <span class="navbar-text text-white">Progress Tracker App</span>
         </div>
       </div>
     </nav>
 
-    
-         
-
-
-
-    <!-- Header title under navbar -->
     <div class="text-center text-white py-3">
       <h1>Student Progress Tracker</h1>
       <p>Learn • Track • Improve</p>
     </div>
-  </header>
+</header>
 
-
- <div class="d-flex justify-content-end me-4 mt-2">
+<div class="d-flex justify-content-end me-4 mt-2">
     <a href="https://facebook.com" target="_blank" class="mx-2">
         <img th:src="@{/images/facebook.png}" width="30">
     </a>
@@ -68,89 +56,176 @@
     </a>
 </div>
 
+<!-- Cards Section -->
+<div class="container mt-4">
+  <div class="row g-4">
 
-
-  <!-- Cards Section -->
-  <div class="container mt-4">
-    <div class="row g-4">
-
-      <!-- Card 1 -->
-      <div class="col-md-4">
+    <!-- Card 1 -->
+    <div class="col-md-4">
+      <a data-bs-toggle="collapse" href="#info1" class="text-decoration-none text-dark">
         <div class="card h-100">
           <img src="./images/11.jpg" class="card-img-top" alt="Performance">
           <div class="card-body">
             <p class="card-text">Track student performance easily.</p>
           </div>
         </div>
-      </div>
+      </a>
+      <div class="card-hover-message">Learn more</div>
+    </div>
 
-      <!-- Card 2 -->
-      <div class="col-md-4">
+    <!-- Card 2 (Login Page) -->
+    <div class="col-md-4">
+      <a data-bs-toggle="collapse" href="#info2" class="text-decoration-none text-dark">
         <div class="card h-100">
-          <img src="./images/1.jpg" class="card-img-top" alt="Subject Progress">
+          <img src="./images/1.jpg" class="card-img-top" alt="Login Page">
           <div class="card-body">
-            <p class="card-text">Monitor subject progress.</p>
+            <p class="card-text">Logins Page</p>
           </div>
         </div>
-      </div>
+      </a>
+      <div class="card-hover-message">Learn more</div>
+    </div>
 
-      <!-- Card 3 -->
-      <div class="col-md-4">
+    <!-- Card 3 -->
+    <div class="col-md-4">
+      <a data-bs-toggle="collapse" href="#info3" class="text-decoration-none text-dark">
         <div class="card h-100">
           <img src="./images/10.jpg" class="card-img-top" alt="Learning Outcomes">
           <div class="card-body">
             <p class="card-text">Improve learning outcomes.</p>
           </div>
         </div>
-      </div>
+      </a>
+      <div class="card-hover-message">Learn more</div>
+    </div>
 
-      <!-- Card 4 -->
-      <div class="col-md-4">
+    <!-- Card 4 -->
+    <div class="col-md-4">
+      <a data-bs-toggle="collapse" href="#info4" class="text-decoration-none text-dark">
         <div class="card h-100">
           <img src="./images/12.jpg" class="card-img-top" alt="LC Subjects">
           <div class="card-body">
             <p class="card-text">LC Subjects</p>
           </div>
         </div>
-      </div>
+      </a>
+      <div class="card-hover-message">Learn more</div>
+    </div>
 
-      <!-- Card 5 -->
-      <div class="col-md-4">
+    <!-- Card 5 -->
+    <div class="col-md-4">
+      <a data-bs-toggle="collapse" href="#info5" class="text-decoration-none text-dark">
         <div class="card h-100">
           <img src="./images/13.jpg" class="card-img-top" alt="Junior Cycle">
           <div class="card-body">
             <p class="card-text">Junior Cycle Subjects</p>
           </div>
         </div>
-      </div>
+      </a>
+      <div class="card-hover-message">Learn more</div>
+    </div>
 
-      <!-- Card 6 -->
-      <div class="col-md-4">
+    <!-- Card 6 -->
+    <div class="col-md-4">
+      <a data-bs-toggle="collapse" href="#info6" class="text-decoration-none text-dark">
         <div class="card h-100">
           <img src="./images/2.jpg" class="card-img-top" alt="Learning Outcomes">
           <div class="card-body">
             <p class="card-text">Improve learning outcomes.</p>
           </div>
         </div>
-      </div>
+      </a>
+      <div class="card-hover-message">Learn more</div>
+    </div>
 
+  </div>
+</div>
+
+<!-- Info Boxes -->
+<div class="container mt-5">
+
+  <div id="info1" class="collapse">
+    <div class="alert alert-primary">
+      <h5>Tracking Student Performance</h5>
+      <p>This feature helps you monitor student progress, identify strengths, and spot areas needing improvement.</p>
     </div>
   </div>
 
+  <div id="info2" class="collapse">
+    <div class="alert alert-success">
+      <h5>Logins Page</h5>
+      <p>This section allows administrators and students to securely log in and access their dashboards.</p>
+      <a th:href="@{/admin/login}" class="btn btn-primary mt-2">Go to Login</a>
+    </div>
+  </div>
 
+  <div id="info3" class="collapse">
+    <div class="alert alert-warning">
+      <h5>Learning Outcomes</h5>
+      <p>Understand how well students are meeting learning goals and curriculum standards.</p>
+    </div>
+  </div>
 
+  <div id="info4" class="collapse">
+    <div class="alert alert-info">
+      <h5>LC Subjects</h5>
+      <p>We offer grinds across all major Leaving Certificate subjects, including core subjects, languages, sciences, and business. Students can track their progress, monitor grades, and review performance in each subject.</p>
+    
+    </div>
+  </div>
 
+  <div id="info5" class="collapse">
+    <div class="alert alert-secondary">
+      <h5>Junior Cycle Subjects</h5>
+      <p>We provide support in all key Junior Cycle subjects, helping students build strong foundations. Progress tracking and grade monitoring allow students to stay focused and improve consistently.</p>
+      <p>Monitor progress in Junior Cycle subjects with clear visual indicators.</p>
+    </div>
+  </div>
 
+  <div id="info6" class="collapse">
+    <div class="alert alert-dark">
+      <h5>Learning Outcomes</h5>
+      <p>Improve learning outcomes with structured tracking and feedback.</p>
+    </div>
+  </div>
 
-  <!-- Footer -->
-  <footer class="footer mt-auto text-center py-4 footer-custom">
+</div>
+
+<!-- Footer -->
+<footer class="footer mt-auto text-center py-4 footer-custom">
     <p><strong>Contact Us</strong></p>
     <p>123 Learning Street, Knowledge City</p>
     <p>Phone: +123 456 7890 | Email: info@studentprogress.com</p>
-  </footer>
 
-  <!-- Bootstrap JS -->
-  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/js/bootstrap.bundle.min.js"></script>
+    <hr style="width: 60%; margin: 20px auto;">
+
+    <p class="text-muted" style="font-size: 0.9rem;">
+        © 2026 TrackMyGrades. All rights reserved.
+    </p>
+</footer>
+
+<!-- Smooth Scroll Script -->
+<script>
+document.addEventListener("DOMContentLoaded", function () {
+    document.querySelectorAll("[data-bs-toggle='collapse']").forEach(card => {
+        card.addEventListener("click", function () {
+            const target = this.getAttribute("href");
+
+            setTimeout(() => {
+                const element = document.querySelector(target);
+                if (element) {
+                    element.scrollIntoView({
+                        behavior: "smooth",
+                        block: "start"
+                    });
+                }
+            }, 300);
+        });
+    });
+});
+</script>
+
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/js/bootstrap.bundle.min.js"></script>
 
 </body>
 </html>

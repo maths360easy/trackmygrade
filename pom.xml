@@ -33,6 +33,16 @@
             <artifactId>spring-boot-starter-data-jpa</artifactId>
         </dependency>
 
+
+        <!-- bcrypt Security -->
+        <dependency>
+               <groupId>org.springframework.security</groupId>
+                <artifactId>spring-security-crypto</artifactId>
+
+        </dependency>
+
+
+
         <!-- Thymeleaf -->
         <dependency>
             <groupId>org.springframework.boot</groupId>

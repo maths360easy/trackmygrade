@@ -4,6 +4,7 @@ import java.util.List;
 import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.crypto.bcrypt.BCrypt;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -61,25 +62,28 @@ public class AdminController {
     // =============================
     // 2️⃣ PROCESS LOGIN
     // =============================
-    @PostMapping("/login")
+   @PostMapping("/login")
     public String login(@RequestParam String username,
-                        @RequestParam String password,
-                        HttpSession session,
-                        Model model) {
+                    @RequestParam String password,
+                    HttpSession session,
+                    Model model) {
 
-        Optional<Admin> admin = adminRepo.findByUsername(username);
+    Optional<Admin> admin = adminRepo.findByUsername(username);
 
-        if (admin.isPresent() &&
-            admin.get().getPassword().equals(password)) {
+    if (admin.isPresent()) {
 
+        // Compare raw password with hashed password
+        boolean passwordMatch = BCrypt.checkpw(password, admin.get().getPassword());
+
+        if (passwordMatch) {
             session.setAttribute("loggedAdmin", admin.get());
             return "redirect:/admin/dashboard";
         }
-
-        model.addAttribute("adminError", "Invalid admin login");
-    
-        return "admin-login";
     }
+
+    model.addAttribute("adminError", "Invalid admin login");
+    return "admin-login";
+}
 
     // =============================
     // 3️⃣ DASHBOARD
@@ -129,25 +133,67 @@ public class AdminController {
 
     return "redirect:/admin/dashboard";
 }
+// ---------manage students--------------//
 
-
-/// Manage Student/////
 @GetMapping("/managestudent")
 public String manageStudent(HttpSession session, Model model) {
 
     if (session.getAttribute("loggedAdmin") == null)
         return "redirect:/admin/login";
 
-    model.addAttribute("students", studentRepo.findAll());
+    model.addAttribute("students", studentRepo.findAllByOrderByNameAsc());
     model.addAttribute("attendance", new Attendance());
     model.addAttribute("marks", new Marks());
     model.addAttribute("subjects", courseRepo.findAll());
+
+    // Add total student count
+    long totalStudents = studentRepo.count();
+    model.addAttribute("totalStudents", totalStudents);
+
+      model.addAttribute("course", new Course());
 
     return "managestudent";
 }
 
 
     
+    // Add new course
+    @PostMapping("/course/add")
+    public String addCourse(@ModelAttribute("course") Course course) {
+        courseRepo.save(course);
+        return "redirect:/admin/managestudent";
+    }
+
+    // Edit course
+    @GetMapping("/course/edit/{id}")
+    public String editCourse(@PathVariable Long id, Model model, HttpSession session) {
+
+        if (session.getAttribute("loggedAdmin") == null)
+            return "redirect:/admin/login";
+
+        Course course = courseRepo.findById(id).orElse(null);
+
+        model.addAttribute("course", course);
+        model.addAttribute("subjects", courseRepo.findAll());
+        model.addAttribute("students", studentRepo.findAllByOrderByNameAsc());
+
+        return "managestudent";
+    }
+
+    // Update course
+    @PostMapping("/course/update")
+    public String updateCourse(@ModelAttribute("course") Course course) {
+        courseRepo.save(course);
+        return "redirect:/admin/managestudent";
+    }
+
+    // Delete course
+    @GetMapping("/course/delete/{id}")
+    public String deleteCourse(@PathVariable Long id) {
+        courseRepo.deleteById(id);
+        return "redirect:/admin/managestudent";
+    }
+
 
 //Progress in Htmlpage
 

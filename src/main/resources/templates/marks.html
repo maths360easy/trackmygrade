@@ -66,6 +66,7 @@
         <div class="mb-3">
             <label class="form-label">Student</label>
             <select th:field="*{student}" class="form-select">
+                <option value="">--Choose Student--</option>
                 <option th:each="s : ${students}"
                         th:value="${s.studentId}"
                         th:text="${s.name}">
@@ -77,6 +78,7 @@
         <div class="mb-3">
             <label class="form-label">Subject</label>
             <select th:field="*{subject}" class="form-select">
+                <option value="">--Choose Subject--</option>
                 <option th:each="subj : ${subjects}"
                         th:value="${subj.id}"
                         th:text="${subj.subjectName}">
@@ -107,6 +109,14 @@
     <p><strong>Contact Us</strong></p>
     <p>123 Learning Street, Knowledge City</p>
     <p>Phone: +123 456 7890 | Email: info@studentprogress.com</p>
+
+
+    
+    <hr style="width: 60%; margin: 20px auto;">
+
+    <p class="text-muted" style="font-size: 0.9rem;">
+        © 2026 TrackMyGrades. All rights reserved.
+    </p>
 </footer>
 
 <!-- Bootstrap JS Bundle -->

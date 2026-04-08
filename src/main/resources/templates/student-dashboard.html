@@ -29,8 +29,6 @@
           <ul class="navbar-nav me-auto">
             <li class="nav-item"><a class="nav-link active" th:href="@{/home}">Home</a></li>
            <li class="nav-item"><a class="nav-link" th:href="@{/admin/login}">login</a></li>
-
-         
           </ul>
           <span class="navbar-text text-white">TrackMyGrade App</span>
         </div>
@@ -75,12 +73,45 @@
         <div class="text-center">
             <canvas id="completionChart" width="160" height="160"></canvas>
         </div>
-        
+
+        <!-- Progress Bar -->
+        <div class="mt-3">
+            <div class="progress" style="height: 25px;">
+                <div class="progress-bar bg-primary" role="progressbar"
+                     th:style="'width:' + ${progress} + '%'"
+                     th:text="${progress + '% Completed'}">
+                </div>
+            </div>
+        </div>
+
+        <!-- Color Legend -->
+        <div class="mt-3 text-center">
+            <span class="badge bg-primary">Blue = Completed</span>
+            <span class="badge bg-danger">Red = Remaining</span>
+        </div>
+
+        <!-- Motivational Message -->
+        <div class="alert alert-success mt-3 text-center" th:if="${progress >= 70}">
+            Great job! You're making strong progress — keep going!
+        </div>
+
+        <div class="alert alert-warning mt-3 text-center" th:if="${progress < 70}">
+            You're doing well — keep pushing and you'll reach your goals!
+        </div>
+    </div>
 
     <!-- Marks & Attendance Chart -->
     <div class="card mt-4 p-3">
         <h5>Marks & Attendance</h5>
         <canvas id="marksChart"></canvas>
+
+        <!-- Explanation -->
+        <div class="alert alert-info mt-3">
+            <h6>Understanding Your Performance</h6>
+            <p><b>Marks (%):</b> Shows how well you scored in each monthly test. Higher marks mean stronger understanding of the subject.</p>
+            <p><b>Attendance (%):</b> Shows how often you attended classes. Good attendance usually improves learning and helps boost marks.</p>
+            <p>This graph compares both so you can see how your attendance affects your performance.</p>
+        </div>
     </div>
 
 </div>
@@ -98,15 +129,27 @@ document.addEventListener("DOMContentLoaded", function () {
         data: {
             labels: ['Completed', 'Remaining'],
             datasets: [{
-                data: [progress, 100 - progress]
+                data: [progress, 100 - progress],
+                backgroundColor: ['#007bff', '#dc3545'],
+                hoverBackgroundColor: ['#0056b3', '#b02a37'],
+                borderWidth: 2
             }]
         },
         options: {
-            
-            responsive: false,   
+            animation: false,
+            responsive: false,
             maintainAspectRatio: false,
             cutout: '70%',
-            plugins: { legend: { display: false } }
+            plugins: {
+                legend: { display: true, position: 'bottom' },
+                tooltip: {
+                    callbacks: {
+                        label: function(context) {
+                            return `${context.label}: ${context.raw}%`;
+                        }
+                    }
+                }
+            }
         }
     });
 });
@@ -145,18 +188,8 @@ document.addEventListener("DOMContentLoaded", function () {
         },
         options: {
             scales: {
-                y1: {
-                    type: 'linear',
-                    position: 'left',
-                    min: 0,
-                    max: 100
-                },
-                y2: {
-                    type: 'linear',
-                    position: 'right',
-                    min: 0,
-                    max: 100
-                }
+                y1: { type: 'linear', position: 'left', min: 0, max: 100 },
+                y2: { type: 'linear', position: 'right', min: 0, max: 100 }
             }
         }
     });
@@ -167,6 +200,13 @@ document.addEventListener("DOMContentLoaded", function () {
     <p><strong>Contact Us</strong></p>
     <p>123 Learning Street, Knowledge City</p>
     <p>Phone: +123 456 7890 | Email: info@studentprogress.com</p>
+
+    
+    <hr style="width: 60%; margin: 20px auto;">
+
+    <p class="text-muted" style="font-size: 0.9rem;">
+        © 2026 TrackMyGrades. All rights reserved.
+    </p>
 </footer>
 
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>

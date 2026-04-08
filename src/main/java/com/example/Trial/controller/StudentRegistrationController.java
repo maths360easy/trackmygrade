@@ -33,7 +33,7 @@ public class StudentRegistrationController {
     @PostMapping("/save-student")
     public String saveStudent(Student student) {
 
-        Long cid = student.getCourse().getId();   // ⭐ OPTION A FIX
+        Long cid = student.getCourse().getId();   
         student.setCourse(courseRepo.findById(cid).orElse(null));
 
         studentRepo.save(student);

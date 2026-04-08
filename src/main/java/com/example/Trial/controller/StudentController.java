@@ -42,7 +42,7 @@ public String dashboard(HttpSession session, Model model) {
     model.addAttribute("student", student);
 
     // -------------------------
-    // 1. Handle Progress safely
+    // 1. Handle Progress 
     // -------------------------
     Progress progress = progressRepo.findByStudent(student);
 
@@ -54,7 +54,7 @@ public String dashboard(HttpSession session, Model model) {
     model.addAttribute("progress", progressValue);
 
     // -------------------------
-    // 2. Handle Marks safely
+    // 2. Handle Marks 
     // -------------------------
     List<String> monthsList = marksRepo.findMonthsByStudent(student.getStudentId());
     List<Integer> marksList = marksRepo.findMarksByStudent(student.getStudentId());
@@ -70,7 +70,7 @@ public String dashboard(HttpSession session, Model model) {
     model.addAttribute("marksList", marksList);
 
     // -------------------------
-    // 3. Handle Attendance safely
+    // 3. Handle Attendance 
     // -------------------------
     List<Integer> attendanceList = attendanceRepo.findAttendanceByStudent(student.getStudentId());
 
