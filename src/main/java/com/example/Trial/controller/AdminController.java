@@ -13,6 +13,7 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.example.Trial.model.Admin;
 import com.example.Trial.model.Attendance;
@@ -155,44 +156,51 @@ public String manageStudent(HttpSession session, Model model) {
     return "managestudent";
 }
 
+@GetMapping("/course")
+public String coursePage(Model model, HttpSession session) {
 
-    
-    // Add new course
-    @PostMapping("/course/add")
-    public String addCourse(@ModelAttribute("course") Course course) {
-        courseRepo.save(course);
-        return "redirect:/admin/managestudent";
-    }
+    if (session.getAttribute("loggedAdmin") == null)
+        return "redirect:/admin/login";
 
-    // Edit course
-    @GetMapping("/course/edit/{id}")
-    public String editCourse(@PathVariable Long id, Model model, HttpSession session) {
+    model.addAttribute("courses", courseRepo.findAll());  // matches HTML
+    model.addAttribute("course", new Course());           // empty form
 
-        if (session.getAttribute("loggedAdmin") == null)
-            return "redirect:/admin/login";
+    return "course";  // matches course.html
+}
 
-        Course course = courseRepo.findById(id).orElse(null);
+@PostMapping("/course/add")
+public String addCourse(@ModelAttribute("course") Course course) {
+    courseRepo.save(course);
+    return "redirect:/admin/course";
+}
 
-        model.addAttribute("course", course);
-        model.addAttribute("subjects", courseRepo.findAll());
-        model.addAttribute("students", studentRepo.findAllByOrderByNameAsc());
+@GetMapping("/course/edit/{id}")
+public String editCourse(@PathVariable Long id, Model model, HttpSession session) {
 
-        return "managestudent";
-    }
+    if (session.getAttribute("loggedAdmin") == null)
+        return "redirect:/admin/login";
 
-    // Update course
-    @PostMapping("/course/update")
-    public String updateCourse(@ModelAttribute("course") Course course) {
-        courseRepo.save(course);
-        return "redirect:/admin/managestudent";
-    }
+    Course course = courseRepo.findById(id).orElse(null);
 
-    // Delete course
-    @GetMapping("/course/delete/{id}")
-    public String deleteCourse(@PathVariable Long id) {
-        courseRepo.deleteById(id);
-        return "redirect:/admin/managestudent";
-    }
+    model.addAttribute("course", course);
+    model.addAttribute("courses", courseRepo.findAll());  // matches HTML
+
+    return "course";
+}
+
+@PostMapping("/course/update")
+public String updateCourse(@ModelAttribute("course") Course course) {
+    courseRepo.save(course);
+    return "redirect:/admin/course";
+}
+
+@GetMapping("/course/delete/{id}")
+public String deleteCourse(@PathVariable Long id) {
+    courseRepo.deleteById(id);
+    return "redirect:/admin/course";
+}
+
+
 
 
 //Progress in Htmlpage
@@ -282,16 +290,29 @@ public String progressPage(HttpSession session, Model model) {
     // 6️⃣ DELETE STUDENT
     // =============================
  
-        @GetMapping("/delete/{id}")
-    public String delete(@PathVariable Long id, HttpSession session) {
+   @GetMapping("/delete/{id}")
+    public String delete(@PathVariable Long id, HttpSession session, RedirectAttributes redirectAttributes) {
 
     if (session.getAttribute("loggedAdmin") == null)
         return "redirect:/admin/login";
 
-    studentRepo.deleteById(id);
+    try {
+        attendanceRepo.deleteAll(attendanceRepo.findByStudentStudentId(id));
+        marksRepo.deleteAll(marksRepo.findByStudentStudentId(id));
+        progressRepo.deleteByStudentStudentId(id);
+        studentRepo.deleteById(id);
 
-    return "redirect:/admin/dashboard";
-       }
+        redirectAttributes.addFlashAttribute("success", "Student deleted successfully.");
+    }
+    catch (Exception e) {
+        redirectAttributes.addFlashAttribute("error",
+                "Cannot delete student. Please delete marks, attendance, and progress first.");
+    }
+
+    return "redirect:/admin/managestudent";
+}
+
+  
 
 
     //edit

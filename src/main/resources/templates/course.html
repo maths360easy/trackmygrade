@@ -1,0 +1,164 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Add Student</title>
+
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+  <link rel="stylesheet" th:href="@{/style.css}">
+</head>
+
+<body class="d-flex flex-column min-vh-100">
+
+<!-- HEADER + NAVBAR -->
+<header class="header-custom">
+    <nav class="navbar navbar-expand-lg navbar-dark">
+      <div class="container-fluid">
+
+        <a class="navbar-brand d-flex align-items-center" href="#">
+         <img th:src="@{/images/logo1.jpg}" width="80" height="80" class="me-2">
+          TrackMyGrades
+        </a>
+
+        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarText">
+          <span class="navbar-toggler-icon"></span>
+        </button>
+
+        <div class="collapse navbar-collapse" id="navbarText">
+          <ul class="navbar-nav me-auto">
+
+            <li class="nav-item"><a class="nav-link active" th:href="@{/home}">Home</a></li>
+      
+
+        
+            <li class="nav-item"><a class="nav-link" th:href="@{/admin/login}">login</a></li>
+         
+            </ul>
+          <span class="navbar-text text-white">TrackMyGrade App</span>
+        </div>
+      </div>
+    </nav>
+
+
+    
+
+    <div class="text-center text-white py-3">
+
+
+      <h1> TrackMyGrades</h1>
+      <h2>Student Progress App</h2>
+      <p>Learn • Track • Improve</p>
+    
+    </div>
+</header>
+
+
+<div class="d-flex justify-content-end me-4 mt-2">
+    <a href="https://facebook.com" target="_blank" class="mx-2">
+        <img th:src="@{/images/facebook.png}" width="30">
+    </a>
+    <a href="https://instagram.com" target="_blank" class="mx-2">
+        <img th:src="@{/images/instagram.png}" width="30">
+    </a>
+    <a href="https://twitter.com" target="_blank" class="mx-2">
+        <img th:src="@{/images/twitter.png}" width="30">
+    </a>
+</div>
+
+
+
+
+
+
+<body>
+
+<main>
+
+<!-- Add Course Form -->
+<div class="card shadow mb-4">
+  <div class="card-header bg-primary text-white">Add New Course</div>
+
+  <div class="card-body">
+    <form th:action="@{/admin/course/add}" th:object="${course}" method="post">
+
+      <div class="mb-3">
+        <label class="form-label">Subject Name</label>
+        <input type="text" th:field="*{subjectName}" class="form-control" placeholder="Enter subject name" required>
+      </div>
+
+      <div class="mb-3">
+        <label class="form-label">Subject Fee</label>
+        <input type="number" th:field="*{subjectFee}" class="form-control" placeholder="Enter subject fee" required>
+      </div>
+
+      <button type="submit" class="btn btn-success">Add Course</button>
+    </form>
+  </div>
+</div>
+
+
+<!-- Course List Table -->
+<div class="card shadow mb-4">
+  <div class="card-header bg-dark text-white">Courses List</div>
+
+  <div class="card-body table-responsive">
+    <table class="table table-bordered table-striped">
+      <thead class="table-dark">
+        <tr>
+          <th>Course ID</th>
+          <th>Subject Name</th>
+          <th>Subject Fee</th>
+          <th>Actions</th>
+        </tr>
+      </thead>
+
+      <tbody>
+        <tr th:each="c : ${courses}">
+          <td th:text="${c.id}"></td>
+          <td th:text="${c.subjectName}"></td>
+          <td th:text="${c.subjectFee}"></td>
+          <td>
+            <a th:href="@{'/admin/course/edit/' + ${c.id}}" class="btn btn-success btn-sm">Edit</a>
+            <a th:href="@{'/admin/course/delete/' + ${c.id}}" class="btn btn-danger btn-sm">Delete</a>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+</div>
+
+</main>
+
+
+
+
+
+
+
+
+<div class="text-center mb-4">
+  <a th:href="@{/admin/dashboard}" class="btn btn-secondary">Back to Dashboard</a>
+</div>
+
+</div>
+
+
+
+<!-- FOOTER -->
+<footer class="footer mt-auto text-center py-4 footer-custom">
+    <p><strong>Contact Us</strong></p>
+    <p>123 Learning Street, Knowledge City</p>
+    <p>Phone: +123 456 7890 | Email: info@studentprogress.com</p>
+
+    
+    <hr style="width: 60%; margin: 20px auto;">
+
+    <p class="text-muted" style="font-size: 0.9rem;">
+        © 2026 TrackMyGrades. All rights reserved.
+    </p>
+</footer>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+</body>
+</html>

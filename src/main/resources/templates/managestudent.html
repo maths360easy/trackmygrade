@@ -54,11 +54,14 @@
   <li class="nav-item"><button class="nav-link" data-bs-toggle="tab" data-bs-target="#attendance">Attendance</button></li>
   <li class="nav-item"><button class="nav-link" data-bs-toggle="tab" data-bs-target="#marks">Marks</button></li>
   <li class="nav-item"><button class="nav-link" data-bs-toggle="tab" data-bs-target="#progress">Progress</button></li>
-  <li class="nav-item"><button class="nav-link" data-bs-toggle="tab" data-bs-target="#courses">Courses</button></li>
+
 </ul>
 
 <!-- TAB CONTENT -->
 <div class="tab-content">
+  <div th:if="${error}" class="alert alert-danger" th:text="${error}"></div>
+  <div th:if="${success}" class="alert alert-success" th:text="${success}"></div>
+
 
   <!-- STUDENTS TAB -->
   <div class="tab-pane fade show active" id="students">
@@ -100,15 +103,18 @@
       <form th:action="@{/admin/save-attendance}" th:object="${attendance}" method="post">
 
         <div class="mb-3">
-          <label>Student</label>
-          <select th:field="*{student}" class="form-select">
+        <label>Student</label>
+           <select th:field="*{student}" class="form-select">
+              <option value="">--Choose Student--</option>
             <option th:each="s : ${students}" th:value="${s.studentId}" th:text="${s.name}"></option>
           </select>
         </div>
 
         <div class="mb-3">
           <label>Subject</label>
+         
           <select th:field="*{subject}" class="form-select">
+              <option value="">--Choose Subject--</option>
             <option th:each="subj : ${subjects}" th:value="${subj.id}" th:text="${subj.subjectName}"></option>
           </select>
         </div>
@@ -137,14 +143,18 @@
 
         <div class="mb-3">
           <label>Student</label>
+           
           <select th:field="*{student}" class="form-select">
+              <option value="">--Choose Student--</option>
             <option th:each="s : ${students}" th:value="${s.studentId}" th:text="${s.name}"></option>
           </select>
         </div>
 
         <div class="mb-3">
           <label>Subject</label>
+         
           <select th:field="*{subject}" class="form-select">
+            <option value="">--Choose Subject--</option>
             <option th:each="subj : ${subjects}" th:value="${subj.id}" th:text="${subj.subjectName}"></option>
           </select>
         </div>
@@ -174,6 +184,7 @@
         <div class="mb-3">
           <label>Student</label>
           <select name="studentId" class="form-select">
+              <option value="">--Choose Student--</option>
             <option th:each="s : ${students}" th:value="${s.studentId}" th:text="${s.name}"></option>
           </select>
         </div>
@@ -188,65 +199,9 @@
     </div>
   </div>
 
-  <!-- COURSES TAB -->
-  <div class="tab-pane fade" id="courses">
+ 
 
-    <h3>Manage Courses</h3>
-
-    <!-- Add / Edit Course Form -->
-    <div class="card mb-4">
-      <div class="card-header bg-primary text-white">Add / Edit Course</div>
-      <div class="card-body">
-        <form th:action="@{${course.id} != null ? '/admin/course/update' : '/admin/course/add'}"
-              th:object="${course}" method="post">
-
-          <input type="hidden" th:field="*{id}">
-
-          <div class="mb-3">
-            <label>Subject Name</label>
-            <input type="text" th:field="*{subjectName}" class="form-control" required>
-          </div>
-
-          <div class="mb-3">
-            <label>Subject Fee</label>
-            <input type="number" th:field="*{subjectFee}" class="form-control" required>
-          </div>
-
-          <button type="submit" class="btn btn-success">Save</button>
-        </form>
-      </div>
-    </div>
-
-    <!-- Course List Table -->
-    <div class="card">
-      <div class="card-body table-responsive">
-        <table class="table table-bordered table-striped">
-          <thead class="table-dark">
-            <tr>
-              <th>Course ID</th>
-              <th>Subject Name</th>
-              <th>Subject Fee</th>
-              <th>Actions</th>
-            </tr>
-          </thead>
-          <tbody>
-            <tr th:each="c : ${subjects}">
-              <td th:text="${c.id}"></td>
-              <td th:text="${c.subjectName}"></td>
-              <td th:text="${c.subjectFee}"></td>
-              <td>
-                <a th:href="@{'/admin/course/edit/' + ${c.id}}" class="btn btn-success btn-sm">Edit</a>
-                <a th:href="@{'/admin/course/delete/' + ${c.id}}" class="btn btn-danger btn-sm">Delete</a>
-              </td>
-            </tr>
-          </tbody>
-        </table>
-      </div>
-    </div>
-
-  </div>
-
-</div>
+ 
 
 </main>
 

@@ -12,7 +12,7 @@ public static void main(String[] args) {
     SpringApplication.run(TrialApplication.class, args);
 
     // TEMPORARY CODE TO GENERATE HASH
-    String raw = "Admin1234";   // your chosen password
+    String raw = "Admin1234";   
     String hash = BCrypt.hashpw(raw, BCrypt.gensalt());
     System.out.println("HASH = " + hash);
 }

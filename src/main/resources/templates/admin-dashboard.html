@@ -66,64 +66,75 @@
     </div>
   </header>
 
-  <!-- MAIN CONTENT -->
-  <main class="container mt-5 flex-grow-1">
+ 
+<!-- MAIN CONTENT -->
+<main class="container mt-6 flex-grow-1">
 
-    <h2 class="mb-4 text-center">Welcome Admin 🎓</h2>
+  <h2 class="mb-4 text-center">Welcome Admin 🎓</h2>
 
-    <div class="row g-4">
+  <div class="row g-4">
 
-      <!-- Add Students -->
-      <div class="col-md-3">
-        <div class="card shadow text-center p-3">
-          <h5>Add Students</h5>
-          <a th:href="@{/admin/add-student}" class="btn btn-primary mt-2">Open</a>
-        </div>
+    <!-- Add Students -->
+    <div class="col-md-3">
+      <div class="card shadow text-center p-3">
+        <h5>Add Students</h5>
+        <a th:href="@{/admin/add-student}" class="btn btn-primary mt-2">Open</a>
       </div>
-
-      <!-- Manage Students -->
-      <div class="col-md-3">
-        <div class="card shadow text-center p-3">
-          <h5>Manage Students</h5>
-          <a th:href="@{/admin/managestudent}" class="btn btn-success mt-2">Update</a>
-        </div>
-      </div>
-
-      <!-- Marks -->
-      <div class="col-md-3">
-        <div class="card shadow text-center p-3">
-          <h5>Marks</h5>
-          <a th:href="@{/admin/marks}" class="btn btn-success mt-2">Marks</a>
-        </div>
-      </div>
-
-      <!-- Attendance -->
-      <div class="col-md-3">
-        <div class="card shadow text-center p-3">
-          <h5>Attendance</h5>
-          <a th:href="@{/admin/attendance}" class="btn btn-success mt-2">Attendance</a>
-        </div>
-      </div>
-
-      <!-- Progress -->
-      <div class="col-md-3">
-        <div class="card shadow text-center p-3">
-          <h5>Progress</h5>
-          <a th:href="@{/admin/progress}" class="btn btn-success mt-2">Progress</a>
-        </div>
-      </div>
-
-      <!-- FeePaid -->
-      <div class="col-md-3">
-        <div class="card shadow text-center p-3">
-          <h5>FeePaid</h5>
-          <a th:href="@{/admin/add-student}" class="btn btn-success mt-2">FeePaid</a>
-        </div>
-      </div>
-
     </div>
 
-    <div class="text-center mt-5">
+    <!-- Manage Students -->
+    <div class="col-md-3">
+      <div class="card shadow text-center p-3">
+        <h5>Manage Students</h5>
+        <a th:href="@{/admin/managestudent}" class="btn btn-success mt-2">Update</a>
+      </div>
+    </div>
+
+    <!-- Marks -->
+    <div class="col-md-3">
+      <div class="card shadow text-center p-3">
+        <h5>Marks</h5>
+        <a th:href="@{/admin/marks}" class="btn btn-success mt-2">Marks</a>
+      </div>
+    </div>
+
+    <!-- Attendance -->
+    <div class="col-md-3">
+      <div class="card shadow text-center p-3">
+        <h5>Attendance</h5>
+        <a th:href="@{/admin/attendance}" class="btn btn-success mt-2">Attendance</a>
+      </div>
+    </div>
+
+    <!-- Progress -->
+    <div class="col-md-3">
+      <div class="card shadow text-center p-3">
+        <h5>Progress</h5>
+        <a th:href="@{/admin/progress}" class="btn btn-success mt-2">Progress</a>
+      </div>
+    </div>
+
+    <!-- FeePaid -->
+    <div class="col-md-3">
+      <div class="card shadow text-center p-3">
+        <h5>FeePaid</h5>
+        <a th:href="@{/admin/add-student}" class="btn btn-success mt-2">FeePaid</a>
+      </div>
+    </div>
+
+    <!-- Courses (FIXED POSITION) -->
+    <div class="col-md-3">
+      <div class="card shadow text-center p-3">
+        <h5>Courses</h5>
+        <a th:href="@{/admin/course}" class="btn btn-success mt-2">Update Course</a>
+      </div>
+    </div>
+
+  </div> <!-- end row -->
+
+</main>
+
+    <div class="text-center mt-6">
       <a th:href="@{/admin/logout}" class="btn btn-danger">Logout</a>
     </div>
 

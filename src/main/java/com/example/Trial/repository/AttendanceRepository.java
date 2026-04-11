@@ -15,6 +15,8 @@ public interface AttendanceRepository extends JpaRepository<Attendance, Long> {
 
 @Query("SELECT a.attendancePercent FROM Attendance a WHERE a.student.studentId = :id ORDER BY a.amonth")
 List<Integer> findAttendanceByStudent(@Param("id") Long id);
+List<Attendance> findByStudentStudentId(Long studentId);
+
 
 }
 

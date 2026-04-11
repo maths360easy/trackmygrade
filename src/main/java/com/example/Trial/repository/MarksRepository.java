@@ -13,6 +13,10 @@ import com.example.Trial.model.Student;
    public interface MarksRepository extends JpaRepository<Marks, Long> {
 
     List<Marks> findByStudent(Student student);
+   List<Marks> findByStudentStudentId(Long studentId);
+
+
+
 
     @Query("SELECT m.testMonth FROM Marks m WHERE m.student.studentId = :id ORDER BY m.testMonth")
     List<String> findMonthsByStudent(@Param("id") Long id);
